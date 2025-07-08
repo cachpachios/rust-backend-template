@@ -8,7 +8,7 @@ Currently it is a simple CRUD API for weather forecasts, but it can be used as a
 
 ## Features
 
-- Tokio running Axum, most used Rust web framework
+- Axum (with Tokio ofc).
 - OpenAPI documentation at `/api-docs/openapi.json` using **utoipa**, Swagger UI running on `/swagger-ui`
 - Prepared postgres with ORM and migrations using **Diesel** and connection pooling with **bb8**
 - Custom `Error` type with `reason` body
