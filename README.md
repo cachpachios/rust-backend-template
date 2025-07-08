@@ -21,7 +21,7 @@ See `db.rs` if you want to change this...
 
 ### Example run
 
-1. Create a PostgreSQL database in whatever preferred way. Example with Docker: 
+1. Spin up a PostgreSQL database in whatever preferred way. Example with Docker: 
 ```bash
 docker run --name postgres -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres
 ```
@@ -30,7 +30,7 @@ docker run --name postgres -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgre
 ```bash
 export DATABASE_URL=postgres://postgres:password@localhost/postgres
 ```
-3. Run the migrations with [Diesel CLI](https://diesel.rs/guides/getting-started#installing-diesel-cli):
+3. Run the database migrations with [Diesel CLI](https://diesel.rs/guides/getting-started#installing-diesel-cli):
 
 ```bash
 diesel migration run
@@ -39,6 +39,14 @@ diesel migration run
 4. Run the project with `cargo run`
 
 5. Open the Swagger UI at `http://localhost:8080/swagger-ui`
+
+## Production Improvements
+
+From this template, to build a production-ready backend, consider the following improvements:
+
+- Abstract the database layer with a trait following a repository pattern to allow testing. Use Axum's `Extension` to inject the database implementation.
+
+- You probably want some kind of authentication validation, ideally as a middleware if using JWTs or similar.
 
 ## License
 
