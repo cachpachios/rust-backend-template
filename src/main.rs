@@ -1,7 +1,6 @@
 use std::env;
 
-use utoipa::openapi::security::{Http, SecurityScheme};
-use utoipa::{Modify, OpenApi};
+use utoipa::OpenApi;
 use utoipa_axum::router::OpenApiRouter;
 use utoipa_swagger_ui::SwaggerUi;
 

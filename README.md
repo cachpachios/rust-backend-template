@@ -12,7 +12,13 @@ So here is a prepared template for a rust backend project.
 
 ## Usage
 
-Copy the whole project, rename it and go nuts.
+Copy the whole project, rename stuff and go nuts.
+
+The Postgres url is provided by the `DATABASE_URL` environment variable.
+
+```bash
+export DATABASE_URL=postgres://username:password@localhost/your_database
+```
 
 ## License
 

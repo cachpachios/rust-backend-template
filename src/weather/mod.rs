@@ -1,3 +1,4 @@
+mod dtos;
 mod models;
 mod router;
 

@@ -29,13 +29,13 @@ pub async fn get_connection_pool() -> &'static Pool<AsyncPgConnection> {
 #[macro_export]
 macro_rules! get_db {
     () => {
-        crate::db::get_connection_pool()
+        $crate::db::get_connection_pool()
             .await
             .get()
             .await
             .map_err(|e| {
                 tracing::error!("Unable to get database connection: {}", e);
-                crate::error::ErrorResponse::internal_server_error("Database connection failed")
+                $crate::error::ErrorResponse::internal_server_error("Database connection failed")
             })?
     };
 }

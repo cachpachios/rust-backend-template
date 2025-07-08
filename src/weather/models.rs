@@ -1,5 +1,8 @@
+use diesel::{Insertable, Queryable};
 use serde::{Deserialize, Serialize};
 use utoipa::ToSchema;
+
+use crate::schema;
 
 #[derive(Serialize, Deserialize, Debug, ToSchema, PartialEq, Clone, Copy)]
 /// Known weather conditions
@@ -15,28 +18,35 @@ pub enum Weather {
 }
 
 impl Weather {
-    pub fn random() -> Self {
-        let weathers = [
-            Weather::Sunny,
-            Weather::Cloudy,
-            Weather::Rain,
-            Weather::Snow,
-        ];
-        let mut rng = rand::rng();
-        let idx = rand::Rng::random_range(&mut rng, 0..weathers.len());
-        weathers[idx]
+    // TODO: Can this be derived?
+    pub fn from_str(value: impl AsRef<str>) -> Option<Self> {
+        match value.as_ref() {
+            "Sunny" => Some(Self::Sunny),
+            "Cloudy" => Some(Self::Cloudy),
+            "Rain" => Some(Self::Rain),
+            "Snow" => Some(Self::Snow),
+            _ => None,
+        }
+    }
+
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            Self::Sunny => "Sunny",
+            Self::Cloudy => "Cloudy",
+            Self::Rain => "Rain",
+            Self::Snow => "Snow",
+        }
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, ToSchema, PartialEq, Clone)]
+#[derive(Queryable, Insertable, Debug)]
+#[diesel(table_name = schema::weather_forecast)]
 pub struct WeatherForecast {
-    /// Current weather
-    #[schema(example = "Sunny")]
-    pub current: Weather,
-    /// Forecast weather for the next period
-    #[schema(example = "Cloudy")]
-    pub forecast: Weather,
-    /// Time until the next period is expected to start in seconds (forecast will become current)
-    #[schema(example = 3600)]
-    pub time_until_forecast: u64,
+    pub region: String,
+
+    pub forecast: String,
+    pub valid_until: chrono::NaiveDateTime,
+
+    pub created_at: chrono::NaiveDateTime,
+    pub updated_at: chrono::NaiveDateTime,
 }
