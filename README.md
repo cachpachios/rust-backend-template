@@ -2,7 +2,7 @@
 
 At some point I realized I was doing the same setup over and over.
 
-So here is a prepared template for a good Rust backend project.
+So I made a prepared template for a good Rust backend project for myself. Really nice starting point for agents too.
 
 Currently it is a simple CRUD API for weather forecasts, but it can be used as a starting point for any other project where you are using postgres and want a OpenAPI documented API.
 
@@ -39,15 +39,3 @@ diesel migration run
 4. Run the project with `cargo run`
 
 5. Open the Swagger UI at `http://localhost:8080/swagger-ui`
-
-## Production Improvements
-
-From this template, to build a production-ready backend, consider the following improvements:
-
-- Abstract the database layer with a trait following a repository pattern to allow testing. Use Axum's `Extension` to inject the database implementation.
-
-- You probably want some kind of authentication validation, ideally as a middleware if using JWTs or similar.
-
-## License
-
-Public domain. Go nuts, no attribution required.
