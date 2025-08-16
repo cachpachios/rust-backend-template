@@ -6,9 +6,9 @@ So I made a prepared template for a good Rust backend project for myself. Really
 
 Currently it is a simple CRUD API for weather forecasts, but it can be used as a starting point for any other project where you are using postgres and want a OpenAPI documented API.
 
-## Features
+## Components
 
-- Axum (with Tokio ofc).
+- Axum
 - OpenAPI documentation at `/api-docs/openapi.json` using **utoipa**, Swagger UI running on `/swagger-ui`
 - Prepared postgres with ORM and migrations using **Diesel** and connection pooling with **bb8**
 - Custom `Error` type with `reason` body
